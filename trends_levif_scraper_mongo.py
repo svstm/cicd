@@ -110,7 +110,7 @@ def scrape_articles(file_name: str = "trends_levif.csv"):
             print(f"url: {single_data['url']}")
             print("An article with this url already exists.")
         else:
-            print("Adding new article ....", single_data)
+            print("Adding new article ...", single_data)
             collection.insert_one(single_data)
 
     client.close()
