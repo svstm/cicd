@@ -14,13 +14,16 @@ jobs:
 
     - name: Run unittests
       run: docker run myimage:${{ github.sha }} python -m pytest .
-
+    - name: Log in to Docker Hub
+      uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Push Docker image
       if: ${{ success() }}
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_PASSWORD }}
-        run: |
-          docker tag myimage:${{ github.sha }} ${{ secrets.DOCKERHUB_USERNAME }}/myimage:${{ github.sha }}
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/myimage:${{ github.sha }} 
+
+
+      run: |
+        docker tag myimage:${{ github.sha }} ${{ secrets.DOCKERHUB_USERNAME }}/myimage:${{ github.sha }}
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/myimage:${{ github.sha }} 
+    
