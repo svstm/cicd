@@ -1,5 +1,5 @@
 
-from trends_levif_scraper_mongo import fun_sum
+from trends_levif_scraper import fun_sum
 
 
 def test_fn():
