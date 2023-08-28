@@ -24,6 +24,11 @@ tqdm.pandas()
 # ssl._create_default_https_context = ssl._create_unverified_context
 
 
+def fun_sum(a, b):
+    c = a+b
+    return c
+
+
 def release_date(url: str, session) -> str:
     rs = session.get(url).text
     soup = bs(rs, "html.parser")
